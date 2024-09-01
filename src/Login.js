@@ -44,7 +44,7 @@ const Login = () => {
 
     const handleClose = () => {
         setOpen(false);
-        window.location.replace("/")
+        window.location.replace("/React-Todo-app/")
     };
 
     const handleErrorClose = () => {

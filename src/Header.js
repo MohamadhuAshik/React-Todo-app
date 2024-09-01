@@ -6,7 +6,7 @@ const Header = ({ title, login, setLogin }) => {
   const logOut = () => {
     localStorage.clear()
     setLogin(false)
-    window.location.replace("/")
+    window.location.replace("/React-Todo-app/")
   }
   return (
     <header>
