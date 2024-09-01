@@ -134,8 +134,8 @@ function App() {
         ) : (
           <Routes>
 
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/React-Todo-app/" element={<Login />} />
+            <Route path="/React-Todo-app/signup" element={<Signup />} />
 
           </Routes>
 

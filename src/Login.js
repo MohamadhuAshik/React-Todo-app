@@ -116,7 +116,7 @@ const Login = () => {
                         Login
                     </Button>
                     <Typography style={{ fontSize: "15px", textAlign: "center", marginTop: "2%" }} >
-                        Don't have account? <span onClick={() => navigate("/signup")} style={{ cursor: "pointer" }} >Create account</span>
+                        Don't have account? <span onClick={() => navigate("/React-Todo-app/signup")} style={{ cursor: "pointer" }} >Create account</span>
                     </Typography>
 
                 </CardContent>
