@@ -59,7 +59,7 @@ const Signup = () => {
 
     const handleClose = () => {
         setOpen(false);
-        navigate("/")
+        navigate("/React-Todo-app/")
     };
 
     const handleErrorClose = () => {
