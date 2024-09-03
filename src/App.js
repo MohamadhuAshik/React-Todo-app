@@ -134,8 +134,8 @@ function App() {
         ) : (
           <Routes>
 
-            <Route path="/React-Todo-app/" element={<Login />} />
-            <Route path="/React-Todo-app/signup" element={<Signup />} />
+            <Route path="/React-Todo-app/" element={<Login loading={isLoading} setIsLoading={setIsLoading} />} />
+            <Route path="/React-Todo-app/signup" element={<Signup loading={isLoading} setIsLoading={setIsLoading} />} />
 
           </Routes>
 

@@ -20,9 +20,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import { ApiServices } from './api/api_services';
+import Loader from './component/Loader';
 
 
-const Signup = () => {
+const Signup = ({ loading, setIsLoading }) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [UserName, setUserName] = useState("")
     const [mailId, setMailId] = useState("")
@@ -67,6 +68,7 @@ const Signup = () => {
     }
 
     const createUser = (name, mailId, password) => {
+        setIsLoading(true)
         setUserNameError(false)
         setMailIdError(false)
         setPasswordNameError(false)
@@ -87,13 +89,17 @@ const Signup = () => {
             mailId: mailId,
             password: password
         }
+
         ApiServices.signUp(data).then((res) => {
             console.log(res)
+            setIsLoading(false)
             if (res.response_code === 200) {
+
                 setOpen(true)
             }
 
         }).catch((err) => {
+            setIsLoading(false)
             if (err) {
                 setErrorOpen(true)
                 setErrorMsg(err.data.errors)
@@ -105,7 +111,8 @@ const Signup = () => {
 
     return (
         <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }} >
-            <Card style={{ boxShadow: "2px 2px 3px 3px lightblue" }} sx={{ maxWidth: 345 }}>
+
+            {!loading ? (<Card style={{ boxShadow: "2px 2px 3px 3px lightblue" }} sx={{ maxWidth: 345 }}>
                 <CardContent>
                     <Typography style={{ fontSize: "20px", textAlign: "center", padding: "10px", marginBottom: "2px" }} gutterBottom variant="h5" component="div">
                         SIGN UP
@@ -176,7 +183,7 @@ const Signup = () => {
                         Already have a account? <span style={{ cursor: "pointer" }} onClick={() => navigate("/React-Todo-app/")}>Login Here</span>
                     </Typography>
                 </CardContent>
-            </Card>
+            </Card>) : <Loader />}
 
             <Dialog
                 maxWidth="xs"

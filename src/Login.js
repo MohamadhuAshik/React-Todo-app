@@ -19,9 +19,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { ApiServices } from './api/api_services';
+import Loader from './component/Loader';
 
 
-const Login = () => {
+const Login = ({ loading, setIsLoading }) => {
     const [showPassword, setShowPassword] = React.useState(false);
 
     const [mailId, setMailId] = useState("")
@@ -52,18 +53,22 @@ const Login = () => {
     }
 
     const logIn = async (mailId, password) => {
+        setIsLoading(true)
         const data = {
             mailId: mailId,
             password: password
         }
         ApiServices.login(data).then((res) => {
             console.log(res)
+            setIsLoading(false)
             if (res.response_code === 200) {
                 localStorage.setItem("token", res.token)
                 localStorage.setItem("name", res.userName)
                 setOpen(true)
             }
+
         }).catch((err) => {
+            setIsLoading(false)
             if (err) {
                 setErrorOpen(true)
                 setErrorMsg(err.data.message)
@@ -73,7 +78,7 @@ const Login = () => {
 
     return (
         <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}  >
-            <Card style={{ boxShadow: "2px 2px 3px 3px lightblue" }} className='shadow' sx={{ maxWidth: 345 }}>
+            {!loading ? (<Card style={{ boxShadow: "2px 2px 3px 3px lightblue" }} className='shadow' sx={{ maxWidth: 345 }}>
                 <CardContent>
                     <Typography style={{ fontSize: "20px", textAlign: "center", padding: "10px", marginBottom: "2px" }} gutterBottom variant="h5" component="div">
                         LOGIN
@@ -120,7 +125,7 @@ const Login = () => {
                     </Typography>
 
                 </CardContent>
-            </Card>
+            </Card>) : <Loader />}
 
 
             <Dialog
